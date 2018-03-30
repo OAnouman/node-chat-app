@@ -20,11 +20,9 @@ io.on('connection', (socket) => {
 
     console.log('New user connected');
 
-    io.on('disconnect', () => console.log('User disconnected from server'));
+    socket.on('disconnect', () => console.log('User disconnected from server'));
 
 });
-
-io.on('disconnect', () => console.log('User disconnected from server'));
 
 // Serve static files
 
