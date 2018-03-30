@@ -18,9 +18,19 @@ const port = process.env.PORT || 3000;
 
 io.on('connection', (socket) => {
 
-    console.log('New user connected');
+    socket.emit('newMessage', {
+        from: '@Martial',
+        text: 'Hey girl !',
+        createdAt: new Date().getTime(),
+    });
 
-    socket.on('disconnect', () => console.log('User disconnected from server'));
+    socket.on('createMessage', (message) => {
+
+        message.createdAt = new Date().getTime();
+
+        console.log('createMessage', message);
+
+    });
 
 });
 
