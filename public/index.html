@@ -5,17 +5,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/libs/bootstrap.min.css">
     <title>Chat App</title>
 </head>
 
 <body>
 
-    <p class="head">Welcome to the Chat App</p>
+    <div class="container">
+
+        <div class="row">
+
+            <h1 class="display-4">Welcome to the Chat App</h1>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col col-md-8 offset-md-2">
+
+                <ol class="list-unstyled" id="message-thread">
+
+
+
+                </ol>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col offset-md-2 col-md-8">
+
+                <form action="" id="message-form">
+
+                    <div class="form-group">
+
+                        <input type="text" name="message" id="message" class="form-control">
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                    
+                        Send message
+                    
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
 
 
     <script src="/socket.io/socket.io.js"></script>
 
+    <script src="/js/libs/jquery.min.js"></script>
+
+    <script src="/js/libs/popper.js"></script>
+
+    <script src="/js/libs/bootstrap.min.js"></script>
+
     <script src="/js/index.js"></script>
+
 </body>
 
 

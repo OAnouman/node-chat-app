@@ -2,10 +2,7 @@ let socket = io();
 
 socket.on('connect', () => {
 
-    // socket.emit('createMessage', {
-    //     to: '@Andrew',
-    //     text: 'Hi dude !',
-    // });
+    console.log('Connected to server.');
 
 });
 
@@ -15,16 +12,28 @@ socket.on('newMessage', (message) => {
 
     console.log('New message', message);
 
+    let li = $('<li></li>');
+
+    li.text(`${message.from} : ${message.text}`);
+
+    $('#message-thread').append(li);
+
 });
 
-socket.on('newUser', (message) => {
+$('#message-form').on('submit', (e) => {
 
-    console.log('Welcome user', message);
+    e.preventDefault();
 
-})
+    socket.emit('createMessage', {
 
-socket.on('userJoined', (message) => {
+        from: 'User',
+        text: $("input[name='message']").val(),
 
-    console.log('New user joined', message);
+    }, (data) => {
 
-})
+        console.log(data);
+
+    });
+
+
+});

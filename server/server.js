@@ -22,9 +22,9 @@ io.on('connection', (socket) => {
 
     console.log('New user connected');
 
-    socket.emit('newUser', generateMessage('@Admin', 'Welcome to the Chat App !'));
+    socket.emit('newMessage', generateMessage('@Admin', 'Welcome to the Chat App !'));
 
-    socket.broadcast.emit('userJoined', generateMessage('@Admin', 'New user joined !'));
+    socket.broadcast.emit('newMessage', generateMessage('@Admin', 'New user joined !'));
 
     // socket.emit('newMessage', {
     //     from: '@Martial',
@@ -32,17 +32,15 @@ io.on('connection', (socket) => {
     //     createdAt: new Date().getTime(),
     // });
 
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, callback) => {
 
         message.createdAt = new Date().getTime();
 
         console.log('createMessage', message);
 
-        // io.emit('newMessage', {
-        //     from: message.from,
-        //     text: message.text,
-        //     createdAt: new Date().getTime(),
-        // });
+        io.emit('newMessage', generateMessage(message.from, message.text));
+
+        callback('Send for the server');
 
         // socket.broadcast.emit('newMessage', {
         //     from: message.from,
@@ -57,7 +55,6 @@ io.on('connection', (socket) => {
 // Serve static files
 
 app.use(express.static(publicPath));
-
 
 server.listen(port,
     () => console.log(`Server up and running on port ${port}...`));
