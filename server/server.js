@@ -16,25 +16,15 @@ let io = socketIO(server);
 
 const port = process.env.PORT || 3000;
 
+const { generateMessage } = require('./utils/message');
+
 io.on('connection', (socket) => {
 
     console.log('New user connected');
 
-    socket.emit('newUser', {
+    socket.emit('newUser', generateMessage('@Admin', 'Welcome to the Chat App !'));
 
-        from: '@Admin',
-        text: 'Welcome to the Chat App !',
-        createdAt: new Date().getTime(),
-
-    });
-
-    socket.broadcast.emit('userJoined', {
-
-        from: '@Admin',
-        text: 'New user joined !',
-        createdAt: new Date().getTime(),
-
-    })
+    socket.broadcast.emit('userJoined', generateMessage('@Admin', 'New user joined !'));
 
     // socket.emit('newMessage', {
     //     from: '@Martial',
