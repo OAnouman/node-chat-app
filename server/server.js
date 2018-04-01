@@ -16,7 +16,9 @@ let io = socketIO(server);
 
 const port = process.env.PORT || 3000;
 
-const { generateMessage } = require('./utils/message');
+const { generateMessage, generateLocationMessage } = require('./utils/message');
+
+const { singleEventEmitter } = require('./utils/event');
 
 io.on('connection', (socket) => {
 
@@ -25,12 +27,6 @@ io.on('connection', (socket) => {
     socket.emit('newMessage', generateMessage('@Admin', 'Welcome to the Chat App !'));
 
     socket.broadcast.emit('newMessage', generateMessage('@Admin', 'New user joined !'));
-
-    // socket.emit('newMessage', {
-    //     from: '@Martial',
-    //     text: 'Hey girl !',
-    //     createdAt: new Date().getTime(),
-    // });
 
     socket.on('createMessage', (message, callback) => {
 
@@ -42,11 +38,11 @@ io.on('connection', (socket) => {
 
         callback('Send for the server');
 
-        // socket.broadcast.emit('newMessage', {
-        //     from: message.from,
-        //     text: message.text,
-        //     createdAt: new Date().getTime(),
-        // });
+    });
+
+    socket.on('createLocationMessage', (coords, callback) => {
+
+        singleEventEmitter(io, 'newLocationMessage', generateLocationMessage('@Admin', coords.latitude, coords.longitude), null);
 
     });
 

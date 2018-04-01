@@ -1,5 +1,15 @@
 let socket = io();
 
+let messageField = $("input[name='message']");
+
+let messageThread = $('#message-thread');
+
+let eventEmitter = (eventName, data, callback) => {
+
+    socket.emit(eventName, data, callback);
+
+};
+
 socket.on('connect', () => {
 
     console.log('Connected to server.');
@@ -16,7 +26,7 @@ socket.on('newMessage', (message) => {
 
     li.text(`${message.from} : ${message.text}`);
 
-    $('#message-thread').append(li);
+    messageThread.append(li);
 
 });
 
@@ -27,7 +37,7 @@ $('#message-form').on('submit', (e) => {
     socket.emit('createMessage', {
 
         from: 'User',
-        text: $("input[name='message']").val(),
+        text: messageField.val(),
 
     }, (data) => {
 
@@ -35,5 +45,48 @@ $('#message-form').on('submit', (e) => {
 
     });
 
+    messageField.val('');
 
 });
+
+socket.on('newLocationMessage', (message) => {
+
+    let li = $('<li></li>');
+
+    let a = $(`<a>My current location</a>`);
+
+    a.attr('target', '_blank')
+        .attr('href', message.url);
+
+    li.text(`${message.from} : `)
+        .append(a);
+
+    messageThread.append(li);
+
+});
+
+
+let geolocationButton = $('#send-geolocation');
+
+geolocationButton.on('click', (e) => {
+
+    if (!'geolocation' in navigator) {
+
+        return alert('Your browser doesn\'t support geolcation');
+
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+
+        eventEmitter('createLocationMessage', {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+        }, (data) => {
+
+
+
+        });
+
+    }, () => alert('Unable to fetch your position.'));
+
+})
