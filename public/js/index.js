@@ -39,13 +39,11 @@ $('#message-form').on('submit', (e) => {
         from: 'User',
         text: messageField.val(),
 
-    }, (data) => {
+    }, () => {
 
-        console.log(data);
+        messageField.val('');
 
     });
-
-    messageField.val('');
 
 });
 
@@ -63,6 +61,10 @@ socket.on('newLocationMessage', (message) => {
 
     messageThread.append(li);
 
+}, () => {
+
+
+
 });
 
 
@@ -76,17 +78,25 @@ geolocationButton.on('click', (e) => {
 
     }
 
+    geolocationButton.text('Sending Location...')
+        .attr('disabled', 'true');
+
     navigator.geolocation.getCurrentPosition((position) => {
 
         eventEmitter('createLocationMessage', {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-        }, (data) => {
+        }, () => {
 
-
+            geolocationButton.removeAttr('disabled')
+                .text('Send Location');
 
         });
 
-    }, () => alert('Unable to fetch your position.'));
+    }, () => {
+        alert('Unable to fetch your position.');
+        geolocationButton.removeAttr('disabled')
+            .text('Send Location');
+    });
 
 })

@@ -6,68 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/app.css">
     <title>Chat App</title>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="container-fluid pl-0">
 
-        <div class="row">
+        <div class="d-flex align-content-stretch flex-row main">
 
-            <h1 class="display-4">Welcome to the Chat App</h1>
+            <div class="col-2 bg-info">
+                <h4 class="text-white">People</h4>
+            </div>
 
-        </div>
+            <div class="d-flex flex-column align-items-end col pl-0 pr-0">
 
-        <div class="row">
+                <div class="col">
 
-            <div class="col col-md-8 offset-md-2">
-
-                <ol class="list-unstyled" id="message-thread">
+                    <ol class="list-unstyled" id="message-thread">
 
 
 
-                </ol>
+                    </ol>
+
+                </div>
+
+                <div class="w-100 pr-0 mt-auto pl-3 pb-2 pt-2 bg-light">
+
+                    <form action="" id="message-form" class="form-inline d-flex flex-row">
+
+                        <div class="form-group pl-0 mb-1 col-9">
+
+                            <input autofocus autocomplete="off" type="text" name="message" id="message" class="form-control col" placeholder="Type your message here">
+
+                        </div>
+
+                        <div class="col-auto pl-0 pr-0 ml-auto">
+
+                            <button type="submit" class="btn btn-outline-primary mb-md-1 ml-md-2 col-auto ml-0">
+                                            
+                                Send 
+
+                            </button>
+
+                            <button class="btn btn-outline-info mb-1 ml-1 col-auto" type="button" id="send-geolocation">
+                                    
+                                Send Location
+                
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
 
             </div>
 
         </div>
-
-        <div class="row">
-
-            <div class="col offset-md-2 col-md-8">
-
-                <form action="" id="message-form">
-
-                    <div class="form-group">
-
-                        <input type="text" name="message" id="message" class="form-control">
-
-                    </div>
-
-                    <button type="submit" class="btn btn-outline-primary">
-                    
-                        Send message
-                    
-                    </button>
-
-                    <button class="btn btn-outline-info" type="button" id="send-geolocation">
-
-                        Send geolocation
-
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-
 
     </div>
-
-
-
 
 
     <script src="/socket.io/socket.io.js"></script>
@@ -79,6 +78,7 @@
     <script src="/js/libs/bootstrap.min.js"></script>
 
     <script src="/js/index.js"></script>
+
 
 </body>
 
