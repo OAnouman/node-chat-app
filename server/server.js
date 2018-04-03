@@ -36,13 +36,15 @@ io.on('connection', (socket) => {
 
         io.emit('newMessage', generateMessage(message.from, message.text));
 
-        callback('Send for the server');
+        callback('Send from the server');
 
     });
 
     socket.on('createLocationMessage', (coords, callback) => {
 
         singleEventEmitter(io, 'newLocationMessage', generateLocationMessage('@Admin', coords.latitude, coords.longitude), null);
+
+        callback();
 
     });
 

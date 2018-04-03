@@ -20,11 +20,16 @@ socket.on('disconnect', () => console.log('Disconnected from server.'));
 
 socket.on('newMessage', (message) => {
 
-    console.log('New message', message);
+    let formattedTime = moment(message.createdAt).format('h:mm a');
 
     let li = $('<li></li>');
 
-    li.text(`${message.from} : ${message.text}`);
+    let small = $('<small class="text-muted"></small>')
+
+    small.text(`${formattedTime}`)
+
+    li.text(`${message.from} : ${message.text} - `).append(small);
+
 
     messageThread.append(li);
 
@@ -49,15 +54,23 @@ $('#message-form').on('submit', (e) => {
 
 socket.on('newLocationMessage', (message) => {
 
+    let formattedTime = moment(message.createdAt).format('h:mm a');
+
     let li = $('<li></li>');
 
     let a = $(`<a>My current location</a>`);
+
+    let small = $('<small class="text-muted"></small>')
+
+    small.text(`${formattedTime}`)
 
     a.attr('target', '_blank')
         .attr('href', message.url);
 
     li.text(`${message.from} : `)
-        .append(a);
+        .append(a)
+        .append(' - ')
+        .append(small);
 
     messageThread.append(li);
 
