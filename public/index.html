@@ -68,6 +68,35 @@
 
     </div>
 
+    <script id="message-template" type="text/template">
+
+        <li id="message">
+            <div id="message__head">
+                <p class="font-weight-bold mb-0">{{from}} <small class="text-muted"> - {{time}}</small></p>
+            </div>
+            <div id="message__body">
+                <p class="message-text">{{text}}</p>
+            </div>
+        </li>
+
+    </script>
+
+
+
+    <script id="location-message-template" type="text/template">
+
+        <li id="message">
+            <div id="message__head">
+                <p class="font-weight-bold mb-0">{{from}} <small class="text-muted"> - {{time}}</small></p>
+            </div>
+            <div id="message__body">
+                <p class="mb-0">
+                    <a class="badge badge-info" target="_blank" href="{{url}}">My location</a>
+                </p>
+            </div>
+        </li>
+
+    </script>
 
     <script src="/socket.io/socket.io.js"></script>
 
@@ -78,6 +107,8 @@
     <script src="/js/libs/bootstrap.min.js"></script>
 
     <script src="/js/libs/moment.min.js"></script>
+
+    <script src="/js/libs/mustache.js"></script>
 
     <script src="/js/index.js"></script>
 

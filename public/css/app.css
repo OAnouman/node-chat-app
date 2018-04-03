@@ -5,3 +5,7 @@
 .main {
     min-height: 100vh;
 }
+
+.message-text {
+    font-size: 0.9rem;
+}
