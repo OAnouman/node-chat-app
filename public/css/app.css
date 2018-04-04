@@ -1,5 +1,6 @@
-.message-thread {
-    min-height: 80vh;
+#message-thread {
+    /* min-height: 90vh; */
+    overflow: auto;
 }
 
 .main {

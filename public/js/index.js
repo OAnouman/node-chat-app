@@ -2,6 +2,8 @@ let socket = io();
 
 let messageField = $("input[name='message']");
 
+let messages = $('#messages');
+
 let messageThread = $('#message-thread');
 
 let eventEmitter = (eventName, data, callback) => {
@@ -9,6 +11,33 @@ let eventEmitter = (eventName, data, callback) => {
     socket.emit(eventName, data, callback);
 
 };
+
+let scrollToBottom = () => {
+
+    // Selectors
+
+    let newMessage = messages.children('li:last-child');
+
+    // Heigths
+
+    let clientHeight = messageThread.prop('clientHeight');
+
+    let scrollTop = messageThread.scrollTop();
+
+    let scrollHeight = messageThread.prop('scrollHeight');
+
+    let newMessageHeight = newMessage.innerHeight();
+
+    let lastMessageHeight = newMessage.prev().innerHeight();
+
+    if (scrollTop + clientHeight + newMessageHeight + lastMessageHeight >=
+        scrollHeight) {
+
+        messageThread.scrollTop(scrollHeight);
+
+    }
+
+}
 
 socket.on('connect', () => {
 
@@ -30,7 +59,9 @@ socket.on('newMessage', (message) => {
         time: formattedTime,
     });
 
-    messageThread.append(li);
+    messages.append(li);
+
+    scrollToBottom();
 
 });
 
@@ -65,11 +96,7 @@ socket.on('newLocationMessage', (message) => {
 
     })
 
-    messageThread.append(li);
-
-}, () => {
-
-
+    messages.append(li);
 
 });
 
