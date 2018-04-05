@@ -3,117 +3,66 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/libs/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/app.css">
-    <title>Chat App</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Chat App - Join </title>
 </head>
 
 <body>
 
-    <div class="container-fluid pl-0">
+    <main class="container-fluid d-flex justify-content-center align-items-center bg-primary">
 
-        <div class="d-flex align-content-stretch flex-row main">
+        <div class="col-auto bg-light border border-primary border-2 rounded">
 
-            <div class="col-2 bg-info">
-                <h4 class="text-white">People</h4>
-            </div>
+            <form action="/chat.html">
 
-            <div class="d-flex flex-column align-items-end col pl-0 pr-0">
+                <div class="text-center pt-2 pb-3">
 
-                <div class="col" id="message-thread">
-
-                    <ol class="list-unstyled" id="messages">
-
-
-
-                    </ol>
+                    <h4 class="text-uppercase font-weight-bold">Join a chat</h4>
 
                 </div>
 
-                <div class="w-100 pr-0 mt-auto pl-3 pb-2 pt-2 bg-light">
+                <div class="form-group">
 
-                    <form action="" id="message-form" class="form-inline d-flex flex-row">
+                    <label for="display-name">Display name</label>
 
-                        <div class="form-group pl-0 mb-1 col-9">
-
-                            <input autofocus autocomplete="off" type="text" name="message" id="message" class="form-control col" placeholder="Type your message here">
-
-                        </div>
-
-                        <div class="col-auto pl-0 pr-0 ml-auto">
-
-                            <button type="submit" class="btn btn-outline-primary mb-md-1 ml-md-2 col-auto ml-0">
-                                            
-                                Send 
-
-                            </button>
-
-                            <button class="btn btn-outline-info mb-1 ml-1 col-auto" type="button" id="send-geolocation">
-                                    
-                                Send Location
-                
-                            </button>
-
-                        </div>
-
-                    </form>
+                    <input type="text" name="display-name " class="form-control" id="display-name " />
 
                 </div>
 
-            </div>
+                <div class="form-group ">
+
+                    <label for="room-name">Room name</label>
+                    <input type="text" name="room-name" id="room-name" class="form-control">
+
+                </div>
+
+                <div class="form-group mt-4">
+
+                    <button type="submit" class="col btn btn-outline-primary text-uppercase">Join</button>
+
+                </div>
+
+            </form>
 
         </div>
 
-    </div>
-
-    <script id="message-template" type="text/template">
-
-        <li id="message">
-            <div id="message__head">
-                <p class="font-weight-bold mb-0">{{from}} <small class="text-muted"> - {{time}}</small></p>
-            </div>
-            <div id="message__body">
-                <p class="message-text">{{text}}</p>
-            </div>
-        </li>
-
-    </script>
+    </main>
 
 
+    <script src="/socket.io/socket.io.js "></script>
 
-    <script id="location-message-template" type="text/template">
+    <script src="/js/libs/jquery.min.js "></script>
 
-        <li id="message">
-            <div id="message__head">
-                <p class="font-weight-bold mb-0">{{from}} <small class="text-muted"> - {{time}}</small></p>
-            </div>
-            <div id="message__body">
-                <p>
-                    <a class="badge badge-info" target="_blank" href="{{url}}">My location</a>
-                </p>
-            </div>
-        </li>
+    <script src="/js/libs/popper.js "></script>
 
-    </script>
+    <script src="/js/libs/bootstrap.min.js "></script>
 
-    <script src="/socket.io/socket.io.js"></script>
+    <!-- <script src="/js/libs/moment.min.js "></script> -->
 
-    <script src="/js/libs/jquery.min.js"></script>
-
-    <script src="/js/libs/popper.js"></script>
-
-    <script src="/js/libs/bootstrap.min.js"></script>
-
-    <script src="/js/libs/moment.min.js"></script>
-
-    <script src="/js/libs/mustache.js"></script>
-
-    <script src="/js/index.js"></script>
-
-
+    <!-- <script src="/js/libs/mustache.js "></script> -->
 </body>
-
 
 </html>
