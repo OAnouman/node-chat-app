@@ -1,6 +1,14 @@
-let singleEventEmitter = (socket, eventName, data, callback) => {
+let singleEventEmitter = (socket, to, eventName, data, callback) => {
 
-    socket.emit(eventName, data, callback);
+    if (to) {
+
+        socket.to(to).emit(eventName, data, callback);
+
+    } else {
+
+        socket.emit(eventName, data, callback);
+
+    }
 
 };
 

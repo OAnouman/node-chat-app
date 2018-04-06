@@ -101,7 +101,6 @@ $('#message-form').on('submit', (e) => {
 
     socket.emit('createMessage', {
 
-        from: 'User',
         text: messageField.val(),
 
     }, () => {
@@ -157,6 +156,7 @@ geolocationButton.on('click', (e) => {
         });
 
     }, () => {
+
         alert('Unable to fetch your position.');
         geolocationButton.removeAttr('disabled')
             .text('Send Location');
