@@ -41,11 +41,41 @@ let scrollToBottom = () => {
 
 socket.on('connect', () => {
 
-    console.log('Connected to server.');
+    let params = $.deparam(window.location.search);
+
+    eventEmitter('join', params, (err) => {
+
+        if (err) {
+
+            alert(err);
+
+            window.location.href('/')
+
+        }
+
+    })
 
 });
 
 socket.on('disconnect', () => console.log('Disconnected from server.'));
+
+socket.on('updateUserList', (userList) => {
+
+    let div = $(`<div class="list-group bg-transparent "></div>`);
+
+    userList.forEach(user => {
+
+        let a = $('<a href="#" class="border-0 text-dark bg-light list-group-item list-group-item-action pt-1 pb-1 mb-2"></a>');
+
+        a.text(user);
+
+        div.append(a);
+
+    });
+
+    $('#users-list').html(div);
+
+});
 
 socket.on('newMessage', (message) => {
 
